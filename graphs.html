@@ -2,112 +2,103 @@
 <html lang="he">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>גרפים מסכמים - יבוא לישראל</title>
-
-  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <style>
     body {
       background-color: #f9f9f9;
       font-family: 'Segoe UI', sans-serif;
     }
-
-    h1 {
-      font-weight: 700;
+    h1, h4 {
       color: #1a237e;
-      margin-bottom: 40px;
+      font-weight: bold;
+      margin-top: 40px;
     }
-
     .summary-section {
       margin-bottom: 60px;
       padding-bottom: 20px;
       border-bottom: 1px solid #ddd;
     }
-
     .chart-table-wrapper {
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
       align-items: flex-start;
+      justify-content: center;
     }
-
     .chart-container {
-      flex: 1 1 300px;
+      flex: 1 1 400px;
       max-width: 400px;
     }
-
     .chart-container canvas {
       width: 100% !important;
       height: auto !important;
     }
-
     .table-container {
-      flex: 1 1 300px;
+      flex: 1 1 400px;
+      max-width: 400px;
     }
-
     .table-summary {
       width: 100%;
       background-color: #fff;
     }
-
     .table-summary th {
       background-color: #e8f0fe;
       color: #0d47a1;
+      text-align: center;
+    }
+    .table-summary td {
+      text-align: center;
     }
   </style>
 </head>
-
 <body class="p-4">
   <h1 class="text-center">גרפים מסכמים על יבוא לישראל</h1>
 
   <div class="container">
+    <!-- מדינות -->
     <div class="summary-section">
-      <h4 class="text-center mb-3">סך ערך יבוא לפי מדינה</h4>
+      <h4 class="text-center mb-3">יבוא לפי מדינה</h4>
       <div class="chart-table-wrapper">
         <div class="chart-container">
-          <canvas id="chartByCountry"></canvas>
+          <canvas id="importChartCountries"></canvas>
         </div>
-        <div class="table-container">
-          <table class="table table-bordered table-summary" id="tableByCountry">
-            <thead><tr><th>מדינה</th><th>סה"כ בש"ח</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
+        <div class="table-container" id="tableContainerCountries"></div>
       </div>
     </div>
 
+    <!-- סוגי מוצרים -->
     <div class="summary-section">
-      <h4 class="text-center mb-3">סך ערך יבוא לפי שיטת מכירה</h4>
+      <h4 class="text-center mb-3">יבוא לפי סוג מוצר</h4>
       <div class="chart-table-wrapper">
         <div class="chart-container">
-          <canvas id="chartByTerms"></canvas>
+          <canvas id="importChartCommodities"></canvas>
         </div>
-        <div class="table-container">
-          <table class="table table-bordered table-summary" id="tableByTerms">
-            <thead><tr><th>שיטת מכירה</th><th>סה"כ בש"ח</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
+        <div class="table-container" id="tableContainerCommodities"></div>
       </div>
     </div>
 
+    <!-- נמלי כניסה -->
     <div class="summary-section">
-      <h4 class="text-center mb-3">סך ערך יבוא לפי יחידת מידה</h4>
+      <h4 class="text-center mb-3">יבוא לפי נמלי כניסה</h4>
       <div class="chart-table-wrapper">
         <div class="chart-container">
-          <canvas id="chartByUnit"></canvas>
+          <canvas id="importChartPorts"></canvas>
         </div>
-        <div class="table-container">
-          <table class="table table-bordered table-summary" id="tableByUnit">
-            <thead><tr><th>יחידת מידה</th><th>סה"כ בש"ח</th></tr></thead>
-            <tbody></tbody>
-          </table>
+        <div class="table-container" id="tableContainerPorts"></div>
+      </div>
+    </div>
+
+    <!-- יחידות מידה -->
+    <div class="summary-section">
+      <h4 class="text-center mb-3">יבוא לפי יחידת מידה</h4>
+      <div class="chart-table-wrapper">
+        <div class="chart-container">
+          <canvas id="importChartUnits"></canvas>
         </div>
+        <div class="table-container" id="tableContainerUnits"></div>
       </div>
     </div>
   </div>
